@@ -23,10 +23,9 @@ def type(command):
 def executable(command):
     result = command.split()
     filename = result[0]
-    arguments = result[1:]
     if check_path(filename):
         exe_path = check_path(filename)
-        output = subprocess.run([exe_path] + arguments, capture_output=True, text=True)
+        output = subprocess.run([exe_path] + result, capture_output=True, text=True)
         return output.stdout
     return None
 
