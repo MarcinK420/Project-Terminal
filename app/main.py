@@ -41,7 +41,8 @@ def main():
         elif command[:4] == 'type':
             print(type(command))
         elif executable(command):
-            print(executable(command))
+            output = executable(command)
+            sys.stdout.write(output)
         else:
             print(f"{command}: command not found")
 
