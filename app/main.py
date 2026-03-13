@@ -25,7 +25,7 @@ def executable(command):
     filename = result[0]
     if check_path(filename):
         exe_path = check_path(filename)
-        output = subprocess.run(filename + result[1:], executable=exe_path, capture_output=True, text=True)
+        output = subprocess.run([filename] + result[1:], executable=exe_path, capture_output=True, text=True)
         return output.stdout
     return None
 
