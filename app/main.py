@@ -8,8 +8,8 @@ def check_path(variable):
             full_path = os.path.join(folder, variable)
             if os.path.exists(full_path) and os.access(full_path, os.X_OK):
                 return full_path
-            else:
-                return None
+        else:
+            return None
 
 def type(command):
     built_in_commands = ['echo', 'exit', 'type']
