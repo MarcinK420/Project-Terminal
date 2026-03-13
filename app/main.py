@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 from app import navigation
+# import navigation
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
@@ -13,7 +14,7 @@ def check_path(variable):
         return None
 
 def type(command):
-    built_in_commands = ['echo', 'exit', 'type']
+    built_in_commands = ['echo', 'exit', 'type', 'pwd']
     if command[5:] in built_in_commands:
         return f"{command[5:]} is a shell builtin" 
     else:
