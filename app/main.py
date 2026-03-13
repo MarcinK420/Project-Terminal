@@ -1,11 +1,17 @@
 import sys
+import os
 
 def type(command):
     built_in_commands = ['echo', 'exit', 'type']
     if command[5:] in built_in_commands:
         return f"{command[5:]} is a shell builtin" 
     else:
-        return f"{command[5:]}: not found"    
+        system_path = os.environ.get('PATH', '')
+        for folder in system_path.split(os.pathsep):
+            full_path = os.path.join(folder, command[5:])
+            if os.path.exists(full_path) and os.access(full_path, os.X_OK):
+                return f"{command[5:]} is {full_path}"
+    return f"{command[5:]}: not found"    
 
 def main():
     while True:
