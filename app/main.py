@@ -1,7 +1,7 @@
 import sys
 import os
 import subprocess
-import navigation
+from app import navigation
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
