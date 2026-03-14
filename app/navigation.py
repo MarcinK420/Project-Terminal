@@ -8,6 +8,9 @@ def change_working_directory(command):
     if os.path.exists(command):
         os.chdir(command)
         return True
+    elif command == '~':
+        os.chdir(os.home_dir())
+        return True
     else:
         return False
 
