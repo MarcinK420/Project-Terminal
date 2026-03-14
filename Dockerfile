@@ -12,4 +12,6 @@ COPY . .
 
 RUN chmod +x your_program.sh
 
+ENV PYTHONPATH=/app
+
 ENTRYPOINT [ "./your_program.sh" ]

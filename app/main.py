@@ -2,7 +2,6 @@ import sys
 import os
 import subprocess
 from app import navigation
-# import navigation
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
@@ -38,6 +37,11 @@ def main():
         command = input()
         if command == 'exit':
             break
+        elif command[:2] == 'cd':
+            if navigation.change_working_directory(command[3:]):
+                navigation.change_working_directory(command[3:])
+            else:
+                print(f"cd: {(command[3:])}: No such file or directory")
         elif command == 'pwd':
             print(navigation.print_working_directory())
         elif command[:4] == 'echo':
