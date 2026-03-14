@@ -6,7 +6,8 @@ def print_working_directory():
 
 def change_working_directory(command):
     if os.path.exists(command):
-        return os.chdir(command)
+        os.chdir(command)
+        return True
     else:
-        return None
+        return False
 

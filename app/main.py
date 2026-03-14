@@ -39,7 +39,7 @@ def main():
             break
         elif command[:2] == 'cd':
             if navigation.change_working_directory(command[3:]):
-                navigation.change_working_directory(command[3:])
+                pass
             else:
                 print(f"cd: {(command[3:])}: No such file or directory")
         elif command == 'pwd':
