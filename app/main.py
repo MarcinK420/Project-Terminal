@@ -3,6 +3,7 @@ import os
 import subprocess
 from app import navigation
 from app import quoting
+import shlex
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
@@ -23,7 +24,8 @@ def type(command):
     return f"{command[5:]}: not found" 
 
 def executable(command):
-    result = command.split()
+    # result = command.split()
+    result = shlex.split(command)
     filename = result[0]
     if check_path(filename):
         exe_path = check_path(filename)
