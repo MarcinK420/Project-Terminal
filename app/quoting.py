@@ -9,7 +9,7 @@ def cat(command):
     filenames = x[1:]
     for name in filenames:
         with open(name, 'r') as file:
-            print(file.read())
+            print(file.read(), end='')
 
     return 1
 
