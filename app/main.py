@@ -49,6 +49,8 @@ def main():
             print(quoting.echo(command))
         elif command[:4] == 'type':
             print(type(command))
+        elif command[:3] == 'cat':
+            quoting.cat(command)
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)
