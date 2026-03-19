@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 from app import navigation
+from app import quoting
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
@@ -45,7 +46,7 @@ def main():
         elif command == 'pwd':
             print(navigation.print_working_directory())
         elif command[:4] == 'echo':
-            print(command[5:])
+            print(quoting.echo(command))
         elif command[:4] == 'type':
             print(type(command))
         elif executable(command):
