@@ -36,13 +36,7 @@ def completer(text, state):
     except (AttributeError, IndexError):
         return None
 
-def display_matches(matches):
-    sys.stdout.write('\n')
-    sys.stdout.write("  ".join(matches) + '\n')
-    sys.stdout.flush()
-    readline.redisplay()
 
-readline.set_completion_display_matches_hook(display_matches)
 readline.set_completer(completer)
 readline.parse_and_bind("tab: complete")
 
