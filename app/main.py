@@ -10,7 +10,7 @@ import readline
 commands = ['echo', 'exit']
 
 def completer(text, state):
-    options = [cmd for cmd in commands if cmd.startswith(text)]
+    options = [cmd + ' ' for cmd in commands if cmd.startswith(text)]
     if state < len(options):
         return options[state]
     else:
