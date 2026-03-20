@@ -74,8 +74,7 @@ def executable(command):
 
 def main():
     while True:
-        sys.stdout.write("$ ")
-        command = input()
+        command = input("$ ")
         if command == 'exit':
             break
         elif '2>>' in command:
