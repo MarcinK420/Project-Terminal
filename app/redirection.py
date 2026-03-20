@@ -4,10 +4,14 @@ import sys
 
 def redirect_stdout(command):
     x = shlex.split(command)
+    redirect_index = None
     for i, word in enumerate(x):
          if word in ('>', '1>'):
               redirect_index = i
               break
+    
+    if redirect_index is None:
+         return
     
     komenda = x[:redirect_index]
     filename = x[redirect_index + 1]
@@ -39,10 +43,13 @@ def redirect_stdout(command):
 
 def redirect_stderr(command):
     x = shlex.split(command)
+    redirect_index = None
     for i, word in enumerate(x):
          if word == '2>':
               redirect_index = i
               break
+    if redirect_index is None:
+         return 
     komenda = x[:redirect_index]
     filename = x[redirect_index + 1]    
     if x[0] == 'echo':
