@@ -37,7 +37,8 @@ def completer(text, state):
         else:
             return None
     elif state == 1 and len(completer.options) > 1:
-        print("  ".join(completer.options))
+        sys.stdout.write("  ".join(completer.options) + '\n')
+        sys.stdout.flush()
         return None
     else:
         return None
