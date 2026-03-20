@@ -7,7 +7,23 @@ from app import redirection
 import shlex
 import readline
 
-commands = ['echo', 'exit']
+def get_autocompletion():
+    commands = ['echo', 'exit', 'type', 'pwd', 'cd', 'cat', 'ls']
+    system_path = os.environ.get('PATH', '')
+
+    for folder in system_path.split(os.pathsep):
+        if os.path.isdir(folder):
+            try:
+                for filename in os.listdir(folder):
+                    filepath = os.path.join(folder, filename)
+                    if os.path.isfile(filepath) and os.access(filepath, os.X_OK):
+                        commands.append(filename)
+            except PermissionError:
+                pass
+    
+    return list(set(commands))
+
+commands = get_autocompletion()
 
 def completer(text, state):
     options = [cmd + ' ' for cmd in commands if cmd.startswith(text)]
