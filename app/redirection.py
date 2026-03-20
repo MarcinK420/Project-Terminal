@@ -40,7 +40,7 @@ def redirect_stdout(command):
 def redirect_stderr(command):
     x = shlex.split(command)
     for i, word in enumerate(x):
-         if word in ('2>'):
+         if word == '2>':
               redirect_index = i
               break
     komenda = x[:redirect_index]
