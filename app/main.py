@@ -36,7 +36,14 @@ def completer(text, state):
     except (AttributeError, IndexError):
         return None
 
+def display_matches(substitution, matches, longest_match_length):
+    print()
+    for i in range(0, len(matches), 4):
+        print("  ".join(matches[i:i+4]))
+    sys.stdout.write("$ " + readline.get_line_buffer)
+    sys.stdout.flush()
 
+readline.set_completion_display_matches_hook(display_matches)
 readline.set_completer(completer)
 readline.parse_and_bind("tab: complete")
 
