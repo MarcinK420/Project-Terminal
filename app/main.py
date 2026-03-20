@@ -36,26 +36,13 @@ def completer(text, state):
     except (AttributeError, IndexError):
         return None
 
-# def completer(text, state):
-#     if state == 0:
-#         options = sorted([cmd for cmd in commands if cmd.startswith(text)])
-#         completer.options = options
+def display_matches(matches):
+    sys.stdout.write('\n')
+    sys.stdout.write("  ".join(matches) + '\n')
+    sys.stdout.flush()
+    readline.redisplay()
 
-#         if not options:
-#             return None
-#         elif len(options) == 1:
-#             return options[0] + ' '
-#         else:
-#             return None
-#     elif state == 1 and len(completer.options) > 1:
-#         sys.stdout.write("  ".join(completer.options) + '\n')
-#         sys.stdout.flush()
-#         return None
-#     else:
-#         return None
-
-# completer.options = []
-
+readline.set_completion_display_matches_hook(display_matches)
 readline.set_completer(completer)
 readline.parse_and_bind("tab: complete")
 
