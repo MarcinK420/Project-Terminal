@@ -47,7 +47,7 @@ def append_stdout(command):
     redirect_index = None
     output = None
     for i, word in enumerate(x):
-         if word in ('>', '1>'):
+         if word in ('>>', '1>>'):
               redirect_index = i
               break
     
