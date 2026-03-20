@@ -27,23 +27,34 @@ commands = get_autocompletion()
 
 def completer(text, state):
     if state == 0:
-        options = sorted([cmd for cmd in commands if cmd.startswith(text)])
-        completer.options = options
-
-        if not options:
-            return None
-        elif len(options) == 1:
-            return options[0] + ' '
-        else:
-            return None
-    elif state == 1 and len(completer.options) > 1:
-        sys.stdout.write("  ".join(completer.options) + '\n')
-        sys.stdout.flush()
-        return None
-    else:
+        completer.matches = sorted([cmd for cmd in commands if cmd.startswith(text)])
+    try:
+        match = completer.matches[state]
+        if len(completer.matches) == 1:
+            return match + ' '
+        return match
+    except (AttributeError, IndexError):
         return None
 
-completer.options = []
+# def completer(text, state):
+#     if state == 0:
+#         options = sorted([cmd for cmd in commands if cmd.startswith(text)])
+#         completer.options = options
+
+#         if not options:
+#             return None
+#         elif len(options) == 1:
+#             return options[0] + ' '
+#         else:
+#             return None
+#     elif state == 1 and len(completer.options) > 1:
+#         sys.stdout.write("  ".join(completer.options) + '\n')
+#         sys.stdout.flush()
+#         return None
+#     else:
+#         return None
+
+# completer.options = []
 
 readline.set_completer(completer)
 readline.parse_and_bind("tab: complete")
