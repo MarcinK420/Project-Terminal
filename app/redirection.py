@@ -36,3 +36,33 @@ def redirect_stdout(command):
     if output is not None:
         with open(filename, "w") as f:
                 f.write(output)
+
+def redirect_stderr(command):
+    x = shlex.split(command)
+    for i, word in enumerate(x):
+         if word in ('2>'):
+              redirect_index = i
+              break
+    komenda = x[:redirect_index]
+    filename = x[redirect_index + 1]    
+    if x[0] == 'echo':
+        print(" ".join(komenda[1:]) + '\n')
+
+    elif x[0] == 'cat':
+        try:
+             result = subprocess.run(['cat'] + komenda[1:], capture_output=True, text=True)
+             print(result.stdout)
+        except Exception as e:
+             output = f"cat: {e}\n"
+
+    elif x[0] == 'ls':
+        try:
+             result = subprocess.run(['ls'] + komenda[1:], capture_output=True, text=True)
+             print(result.stdout)
+        except Exception as e:
+             output = f"ls: {e}\n"   
+
+    if output is not None:
+        with open(filename, "w") as f:
+                f.write(output)
+    
