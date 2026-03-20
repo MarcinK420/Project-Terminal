@@ -43,7 +43,7 @@ def main():
         if command == 'exit':
             break
         elif '>' in command or '1>' in command:
-            redirection.redirect_stdout()
+            redirection.redirect_stdout(command)
         elif command[:2] == 'cd':
             if navigation.change_working_directory(command[3:]):
                 pass
