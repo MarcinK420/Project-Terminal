@@ -80,7 +80,7 @@ def append_stdout(command):
     
     if output is not None:
         with open(filename, "a") as f:
-                f.write(output + '\n')
+                f.write(output)
 
 def redirect_stderr(command):
     x = shlex.split(command)
