@@ -5,6 +5,7 @@ import sys
 def redirect_stdout(command):
     x = shlex.split(command)
     redirect_index = None
+    output = None
     for i, word in enumerate(x):
          if word in ('>', '1>'):
               redirect_index = i
@@ -44,6 +45,7 @@ def redirect_stdout(command):
 def redirect_stderr(command):
     x = shlex.split(command)
     redirect_index = None
+    output = None
     for i, word in enumerate(x):
          if word == '2>':
               redirect_index = i
