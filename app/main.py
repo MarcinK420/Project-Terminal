@@ -5,7 +5,23 @@ from app import navigation
 from app import quoting
 from app import redirection
 import shlex
+import readline
 
+commands = ['echo', 'exit']
+
+def completer(text, state):
+    options = [cmd for cmd in commands if cmd.startswith(text)]
+    if state < len(options):
+        return options[state]
+    else:
+        return None
+
+readline.set_completer(completer)
+readline.parse_and_bind("tab: complete")
+
+readline.clear_history()
+for cmd in commands:
+    readline.add_history(cmd)
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
