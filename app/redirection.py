@@ -19,6 +19,8 @@ def redirect_stdout(command):
         try:
              result = subprocess.run(['cat'] + komenda[1:], capture_output=True, text=True)
              output = result.stdout
+             if result.stderr:
+                  sys.stderr.write(result.stderr)
         except Exception as e:
              sys.stderr.write(f"cat: {e}\n")
 
@@ -26,6 +28,8 @@ def redirect_stdout(command):
         try:
              result = subprocess.run(['ls'] + komenda[1:], capture_output=True, text=True)
              output = result.stdout
+             if result.stderr:
+                  sys.stderr.write(result.stderr)
         except Exception as e:
              sys.stderr.write(f"ls: {e}\n")
     
