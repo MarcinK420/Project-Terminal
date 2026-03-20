@@ -58,14 +58,16 @@ def redirect_stderr(command):
     elif x[0] == 'cat':
         try:
              result = subprocess.run(['cat'] + komenda[1:], capture_output=True, text=True)
-             print(result.stdout)
+             sys.stdout.write(result.stdout)
+             output = result.stderr
         except Exception as e:
              output = f"cat: {e}\n"
 
     elif x[0] == 'ls':
         try:
              result = subprocess.run(['ls'] + komenda[1:], capture_output=True, text=True)
-             print(result.stdout)
+             sys.stdout.write(result.stdout)
+             output = result.stderr
         except Exception as e:
              output = f"ls: {e}\n"   
 
