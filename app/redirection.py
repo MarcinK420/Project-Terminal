@@ -56,6 +56,7 @@ def redirect_stderr(command):
     filename = x[redirect_index + 1]    
     if x[0] == 'echo':
         sys.stdout.write(" ".join(komenda[1:]) + '\n')
+        output = ''
 
     elif x[0] == 'cat':
         try:
