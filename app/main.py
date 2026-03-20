@@ -3,7 +3,9 @@ import os
 import subprocess
 from app import navigation
 from app import quoting
+from app import redirection
 import shlex
+
 
 def check_path(variable):
         system_path = os.environ.get('PATH', '')
@@ -40,6 +42,8 @@ def main():
         command = input()
         if command == 'exit':
             break
+        elif '>' in command or '1>' in command:
+            redirection.redirect_stdout()
         elif command[:2] == 'cd':
             if navigation.change_working_directory(command[3:]):
                 pass
