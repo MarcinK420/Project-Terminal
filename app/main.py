@@ -26,9 +26,15 @@ def get_autocompletion():
 commands = get_autocompletion()
 
 def completer(text, state):
-    options = [cmd + ' ' for cmd in commands if cmd.startswith(text)]
+    # options = [cmd + ' ' for cmd in commands if cmd.startswith(text)]
+    options = [cmd for cmd in commands if cmd.startswith(text)]
     if state < len(options):
-        return options[state]
+        # return options[state]
+        return options[state] + ' '
+    elif state == len(options):
+        if options:
+            return "  ".join(options)
+        return None
     else:
         return None
 
