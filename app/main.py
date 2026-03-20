@@ -27,7 +27,7 @@ commands = get_autocompletion()
 
 def completer(text, state):
     # options = [cmd + ' ' for cmd in commands if cmd.startswith(text)]
-    options = [cmd for cmd in commands if cmd.startswith(text)]
+    options = sorted([cmd for cmd in commands if cmd.startswith(text)])
     if state < len(options):
         # return options[state]
         return options[state] + ' '
