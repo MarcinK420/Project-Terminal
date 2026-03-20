@@ -117,4 +117,41 @@ def redirect_stderr(command):
     if output is not None:
         with open(filename, "w") as f:
                 f.write(output)
+
+def append_stderr(command):
+    x = shlex.split(command)
+    redirect_index = None
+    output = None
+    for i, word in enumerate(x):
+         if word == '2>>':
+              redirect_index = i
+              break
+    if redirect_index is None:
+         return 
+    komenda = x[:redirect_index]
+    filename = x[redirect_index + 1]    
+    if x[0] == 'echo':
+        sys.stdout.write(" ".join(komenda[1:]) + '\n')
+        output = ''
+
+    elif x[0] == 'cat':
+        try:
+             result = subprocess.run(['cat'] + komenda[1:], capture_output=True, text=True)
+             sys.stdout.write(result.stdout)
+             output = result.stderr
+        except Exception as e:
+             output = f"cat: {e}\n"
+
+    elif x[0] == 'ls':
+        try:
+             result = subprocess.run(['ls'] + komenda[1:], capture_output=True, text=True)
+             sys.stdout.write(result.stdout)
+             output = result.stderr
+        except Exception as e:
+             output = f"ls: {e}\n"   
+
+    if output is not None:
+        with open(filename, "a") as f:
+                f.write(output)
+    
     
