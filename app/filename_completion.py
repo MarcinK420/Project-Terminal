@@ -44,17 +44,18 @@ def completer(text, state):
         # if cmd in filename_commands:
         if cmd not in builtin_no_files:
             try:
+                text_to_complete = words[-1] if not line.endswith(' ') else ''
                 current_dir = os.getcwd()
 
-                if '/' in text:
-                    last_slash_idx = text.rfind('/')
-                    dir_part = text[:last_slash_idx + 1]
-                    filename_part = text[last_slash_idx + 1:]
+                if '/' in text_to_complete:
+                    last_slash_idx = text_to_complete.rfind('/')
+                    dir_part = text_to_complete[:last_slash_idx + 1]
+                    filename_part = text_to_complete[last_slash_idx + 1:]
 
                     search_dir = os.path.join(current_dir, dir_part)
                 else:
                     dir_part = ''
-                    filename_part = text
+                    filename_part = text_to_complete
                     search_dir = current_dir
                 
                 if os.path.isdir(search_dir):
