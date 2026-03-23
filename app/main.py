@@ -11,6 +11,7 @@ import readline
 
 
 readline.set_completer(filename_completion.completer)
+readline.set_completer_delims(' \t\n')
 readline.parse_and_bind("tab: complete")
 
 readline.clear_history()
