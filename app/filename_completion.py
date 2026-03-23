@@ -38,9 +38,11 @@ def completer(text, state):
     #Jesli jestesmy juz po pierwszym slowie i probujemy dokonac podpowiedzi nazwy pliku
     elif len(words) >= 1:
         cmd = words[0]
-        filename_commands = ['cat', 'ls', 'cd', 'less', 'vim', 'nano']
+        builtin_no_files = ['echo', 'exit', 'pwd']
+        # filename_commands = ['cat', 'ls', 'cd', 'less', 'vim', 'nano']
 
-        if cmd in filename_commands:
+        # if cmd in filename_commands:
+        if cmd not in builtin_no_files:
             try:
                 current_dir = os.getcwd()
 
