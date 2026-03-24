@@ -65,7 +65,13 @@ def completer(text, state):
                     
                     try:
                         match = completer.matches[state]
-                        return match + ' '
+
+                        full_path = os.path.join(search_dir, match[len(dir_part):])
+
+                        if os.path.isdir(full_path):
+                            return match + '/'
+                        else:
+                            return match + ' '
                     except (AttributeError, IndexError):
                         return None
             except (OSError, AttributeError):
