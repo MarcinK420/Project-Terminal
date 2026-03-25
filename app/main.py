@@ -5,6 +5,7 @@ from app import navigation
 from app import quoting
 from app import redirection
 from app import filename_completion
+from app import pipeline
 import shlex
 import readline
 
@@ -52,6 +53,8 @@ def main():
         command = input("$ ")
         if command == 'exit':
             break
+        elif '|' in command:
+            pipeline.pipeline(command)
         elif '2>>' in command:
             redirection.append_stderr(command) 
         elif '>>' in command or '1>>' in command:
