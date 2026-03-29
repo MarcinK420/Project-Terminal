@@ -29,7 +29,7 @@ def check_path(variable):
         return None
 
 def type(command):
-    built_in_commands = ['echo', 'exit', 'type', 'pwd']
+    built_in_commands = ['echo', 'exit', 'type', 'pwd', 'history']
     if command[5:] in built_in_commands:
         return f"{command[5:]} is a shell builtin" 
     else:
