@@ -61,3 +61,5 @@ def history_on_startup(user_history):
                 user_history.append(line.strip())
     except FileNotFoundError:
         pass
+
+    return user_history
