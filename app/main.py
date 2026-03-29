@@ -6,6 +6,7 @@ from app import quoting
 from app import redirection
 from app import filename_completion
 from app import pipeline
+from app import history
 import shlex
 import readline
 
@@ -49,8 +50,10 @@ def executable(command):
 
 
 def main():
+    user_history = []
     while True:
         command = input("$ ")
+        user_history.append(command)
         if command == 'exit':
             break
         elif '|' in command:
@@ -76,6 +79,8 @@ def main():
             print(type(command))
         elif command[:3] == 'cat':
             quoting.cat(command)
+        elif command == 'history':
+            history.history(user_history)
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)
