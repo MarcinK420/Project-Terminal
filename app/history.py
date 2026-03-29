@@ -9,6 +9,7 @@ def history(command,user_history):
     elif len(commands) > 1 and commands[1] == '-r':
         path_to_file = commands[2]
         user_history.clear()
+        user_history.append(f"history -r {path_to_file}")
         try:
             with open(path_to_file, 'r') as file:
                 for line in file:
