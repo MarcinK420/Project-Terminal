@@ -1,6 +1,8 @@
 import shlex
+import os
 
 last_appended_index = 0
+HISTFILE = os.path.expanduser("~/.shell_history")
 
 def history(command,user_history):
     commands = shlex.split(command)
@@ -50,3 +52,12 @@ def history_append_file(commands,user_history):
                 
     except Exception as e:
         print(f"Error appending to file '{path_to_file}': {e}")
+
+def history_on_startup(user_history):
+    path_to_file = HISTFILE
+    try:        
+        with open(path_to_file, 'r') as file:
+            for line in file:
+                user_history.append(line.strip())
+    except FileNotFoundError:
+        pass

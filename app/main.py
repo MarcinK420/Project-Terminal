@@ -50,7 +50,7 @@ def executable(command):
 
 
 def main():
-    user_history = []
+    user_history = history.history_on_startup([])
     while True:
         command = input("$ ")
         user_history.append(command)
