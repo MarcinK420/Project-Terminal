@@ -1,5 +1,7 @@
 import shlex
 
+last_appended_index = 0
+
 def history(command,user_history):
     commands = shlex.split(command)
     if len(commands) > 1 and commands[1].isdigit():
@@ -38,12 +40,13 @@ def history_write_file(commands,user_history):
 
 def history_append_file(commands,user_history):
     path_to_file = commands[2]
-    last_appended_index = 0
+    global last_appended_index
     try:
         with open(path_to_file, 'a') as file:
             for command in user_history[last_appended_index:]:
                 file.write(command + '\n')
-                last_appended_index += 1
+        
+        last_appended_index = len(user_history)
                 
     except Exception as e:
         print(f"Error appending to file '{path_to_file}': {e}")
