@@ -9,7 +9,7 @@ def history(command,user_history):
     if len(commands) > 1 and commands[1].isdigit():
         num_commands = int(commands[1])
         for index, command in enumerate(user_history[-num_commands:], start=len(user_history) - num_commands + 1):
-            print(f"{index} {command}")
+            print(f"{index:5}  {command}")
     elif len(commands) > 1 and commands[1] == '-r':
         history_read_file(commands,user_history)
     elif len(commands) > 1 and commands[1] == '-w':
@@ -18,7 +18,7 @@ def history(command,user_history):
         history_append_file(commands,user_history)
     else:
         for index, command in enumerate(user_history, start=1):
-            print(f"{index} {command}")
+            print(f"{index:5}  {command}")
 
 def history_read_file(commands,user_history):
     path_to_file = commands[2]
@@ -54,7 +54,7 @@ def history_append_file(commands,user_history):
         print(f"Error appending to file '{path_to_file}': {e}")
 
 def history_on_startup(user_history):
-    path_to_file = HISTFILE
+    path_to_file = os.environ.get('HISTFILE', HISTFILE)
     try:        
         with open(path_to_file, 'r') as file:
             for line in file:
