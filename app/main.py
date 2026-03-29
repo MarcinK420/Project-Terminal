@@ -79,8 +79,8 @@ def main():
             print(type(command))
         elif command[:3] == 'cat':
             quoting.cat(command)
-        elif command == 'history':
-            history.history(user_history)
+        elif command[:7] == 'history':
+            history.history(command, user_history)
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)
