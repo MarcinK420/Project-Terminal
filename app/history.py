@@ -42,5 +42,6 @@ def history_append_file(commands,user_history):
         with open(path_to_file, 'a') as file:
             for command in user_history:
                 file.write(command + '\n')
+                user_history.remove(command)
     except Exception as e:
         print(f"Error appending to file '{path_to_file}': {e}")
