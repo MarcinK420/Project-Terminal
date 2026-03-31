@@ -1,34 +1,78 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/4f2909b6-2280-46d9-9a38-bfa97b891c83)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+Projekt własnej implementacji powłoki systemowej (shell) napisany w Pythonie. Program imituje podstawowe zachowania Basha, oferując wsparcie dla wbudowanych komend, potoków, przekierowań oraz autouzupełniania.
 
-This is a starting point for Python solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+Funkcje
+Wbudowane komendy: echo, pwd, cd, type, exit.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+Autouzupełnianie (TAB): Dynamiczne podpowiadanie komend z $PATH oraz ścieżek plików/katalogów w bieżącym folderze.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+Potoki (Pipes): Możliwość łączenia komend za pomocą | (np. cat file.txt | grep "coś").
 
-# Passing the first stage
+Przekierowania:
 
-The entry point for your `shell` implementation is in `app/main.py`. Study and
-uncomment the relevant code, then run the command below to execute the tests on
-our servers:
+Standardowe wyjście: > oraz >> (nadpisanie/dopisanie).
 
-```sh
-codecrafters submit
-```
+Błędy (stderr): 2> oraz 2>>.
 
-Time to move on to the next stage!
+Historia komend:
 
-# Stage 2 & beyond
+Zapisywana automatycznie do ~/.shell_history.
 
-Note: This section is for stages 2 and beyond.
+Wsparcie dla flag: history -r (odczyt), -w (zapis), -a (dopisanie).
 
-1. Ensure you have `uv` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Run `codecrafters submit` to submit your solution to CodeCrafters. Test
-   output will be streamed to your terminal.
+Zarządzanie procesami: Podstawowa obsługa zadań w tle za pomocą &.
+
+Obsługa cudzysłowów: Poprawne parsowanie argumentów dzięki modułowi shlex.
+
+Struktura projektu
+Aplikacja została podzielona na moduły dla lepszej czytelności:
+
+main.py – Główna pętla REPL i dispatcher komend.
+
+filename_completion.py – Logika autouzupełniania (wykorzystuje bibliotekę readline).
+
+pipeline.py – Obsługa potoków i komunikacji między procesami.
+
+redirection.py – Obsługa przekierowań strumieni do plików.
+
+history.py – Zarządzanie historią i plikiem .shell_history.
+
+navigation.py – Implementacja cd i pwd.
+
+quoting.py – Obsługa komend echo i cat z uwzględnieniem argumentów.
+
+Jak to odpalić?
+Upewnij się, że masz Pythona 3.x.
+
+(Opcjonalnie) Shell najlepiej działa na systemach Unixowych (Linux/macOS) ze względu na bibliotekę readline.
+
+Uruchom plik główny:
+
+Bash
+python3 main.py
+Przykłady użycia
+Nawigacja i pliki:
+
+Bash
+$ cd /home/user/Documents
+$ pwd
+/home/user/Documents
+$ cat plik.txt
+Potoki i przekierowania:
+
+Bash
+$ echo "test" > output.txt
+$ cat output.txt | type echo
+echo is a shell builtin
+Historia:
+
+Bash
+$ history 5  # pokaże 5 ostatnich komend
+$ history -w backup_history.txt
+Do zrobienia (TODO)
+[ ] Pełna obsługa sygnałów (np. Ctrl+C nie powinno zamykać całego shella).
+
+[ ] Implementacja komendy jobs (obecnie to tylko placeholder).
+
+[ ] Bardziej zaawansowana obsługa zmiennych środowiskowych.
+
+Projekt stworzony w celach edukacyjnych, aby zrozumieć jak pod spodem działają strumienie systemowe i procesy.
