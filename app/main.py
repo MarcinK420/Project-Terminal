@@ -7,6 +7,7 @@ from app import redirection
 from app import filename_completion
 from app import pipeline
 from app import history
+from app import jobs
 import shlex
 import readline
 
@@ -90,6 +91,8 @@ def main():
             history.history(command, user_history)
         elif command[:4] == 'jobs':
             pass
+        elif shlex.split(command)[-1] == '&':
+            jobs.starting(command)
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)
