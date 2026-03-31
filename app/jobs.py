@@ -2,7 +2,7 @@ import shlex
 import subprocess
 
 running_commands = {}
-running_commands_last_index = 0
+running_commands_last_index = 1
 
 def starting(command):
     global running_commands_last_index
