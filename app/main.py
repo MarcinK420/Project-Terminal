@@ -93,6 +93,7 @@ def main():
             pass
         elif shlex.split(command)[-1] == '&':
             jobs.starting(command)
+            continue
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)

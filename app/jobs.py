@@ -10,9 +10,11 @@ def starting(command):
     if command.strip().endswith('&'):
         command = command.strip()[:-1].strip()
     cmd = shlex.split(command)
-    
-    process = subprocess.Popen(cmd)
-    running_commands[running_commands_last_index] = process.pid
-    running_commands_last_index += 1
-    for index, pid in running_commands.items():
-        print(f"[{index}] {pid}")
+    try:
+        process = subprocess.Popen(cmd)
+        running_commands[running_commands_last_index] = process.pid
+        running_commands_last_index += 1
+        for index, pid in running_commands.items():
+            print(f"[{index}] {pid}")
+    except Exception as e:
+        print(f"Error starting command '{command}': {e}")
