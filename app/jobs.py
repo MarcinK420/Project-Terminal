@@ -19,8 +19,7 @@ def starting(command):
                 stdin=subprocess.DEVNULL,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
-                creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                close_fds=True,
+                creationflags=subprocess.CREATE_DETACHED_PROCESS,
             )
         # On Unix-like systems
         else:
