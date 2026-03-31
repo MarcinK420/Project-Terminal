@@ -30,7 +30,7 @@ def check_path(variable):
         return None
 
 def type(command):
-    built_in_commands = ['echo', 'exit', 'type', 'pwd', 'history']
+    built_in_commands = ['echo', 'exit', 'type', 'pwd', 'history', 'jobs']
     if command[5:] in built_in_commands:
         return f"{command[5:]} is a shell builtin" 
     else:
@@ -88,6 +88,8 @@ def main():
             quoting.cat(command)
         elif command[:7] == 'history':
             history.history(command, user_history)
+        elif command[:4] == 'jobs':
+            pass
         elif executable(command):
             output = executable(command)
             sys.stdout.write(output)
