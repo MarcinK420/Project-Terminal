@@ -55,6 +55,13 @@ def main():
         command = input("$ ")
         user_history.append(command)
         if command == 'exit':
+            path_to_file = os.environ.get('HISTFILE', history.HISTFILE)
+            try:
+                with open(path_to_file, 'w') as file:
+                    for cmd in user_history:
+                        file.write(cmd + '\n')
+            except Exception as e:
+                print(f"Error writing to file '{path_to_file}': {e}")
             break
         elif '|' in command:
             pipeline.pipeline(command)
